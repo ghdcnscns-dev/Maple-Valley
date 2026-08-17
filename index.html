@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>숲속 축제 점수 계산소 | 마스터 디럭스</title>
+    <title>메이플밸리 | 마스터 디럭스</title>
     
     <!-- 구글 폰트 & Font Awesome 아이콘 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -366,14 +366,14 @@
 
 <div class="main-container">
     <header>
-        <h1>🌲 숲속 축제 점수 계산소 🐾</h1>
+        <h1>🌲 메이플밸리 🐾</h1>
         <p><i class="fas fa-leaf"></i> 항목별 그룹에서 플레이어별 점수를 관리하세요! <i class="fas fa-leaf"></i></p>
     </header>
 
     <!-- 플레이어 추가 섹션 -->
     <section class="setup-section">
         <input type="text" id="playerNameInput" placeholder="동물 친구 이름 입력" onkeypress="if(event.key==='Enter') addPlayer()">
-        <button class="btn-main" onclick="addPlayer()">친구 추가 <i class="fas fa-user-plus"></i></button>
+        <button class="btn-main" onclick="addPlayer()">+인원추가 <i class="fas fa-user-plus"></i></button>
     </section>
 
     <!-- 1. 기념품 카드 그룹 -->
@@ -424,7 +424,7 @@
             <i class="fas fa-gem" style="color:#ff9800;"></i>
             <div>
                 <h2>4. 남은 자원 점수</h2>
-                <span>지도/꿀(1개=1점) / 나머지(3개=1점)</span>
+                <span>지도/꿀(개당 1점) / 나머지(3개당 1점)</span>
             </div>
         </div>
         <div class="category-grid" id="group-resource">
@@ -438,7 +438,7 @@
             <i class="fas fa-flag-checkered" style="color:#e65100;"></i>
             <div>
                 <h2>5. 축제 행사 순위 보너스</h2>
-                <span>각 행사별 1등(+5) 또는 2등(+3) 체크</span>
+                <span>각 행사별 1등 또는 2등 체크</span>
             </div>
         </div>
         <div class="category-grid" id="group-festival">
@@ -453,7 +453,7 @@
 
     <!-- 제작자 표기 -->
     <div class="creator-footer">
-        <i class="fas fa-code"></i> Designed & Crafted by 천상민
+        <i class="fas fa-code"></i> 제작자 : 천상민
     </div>
 </div>
 
@@ -598,10 +598,10 @@
                         <span class="festival-label">행사 ${i+1}</span>
                         <div class="pill-group">
                             <label>
-                                <input type="radio" name="fest-${p.id}-${i}" value="1st" ${val==='1st'?'checked':''} onclick="updateFestival(${p.id}, ${i}, '1st')"> 🥇 1등(+5)
+                                <input type="radio" name="fest-${p.id}-${i}" value="1st" ${val==='1st'?'checked':''} onclick="updateFestival(${p.id}, ${i}, '1st')"> 🥇 1등
                             </label>
                             <label>
-                                <input type="radio" name="fest-${p.id}-${i}" value="2nd" ${val==='2nd'?'checked':''} onclick="updateFestival(${p.id}, ${i}, '2nd')"> 🥈 2등(+3)
+                                <input type="radio" name="fest-${p.id}-${i}" value="2nd" ${val==='2nd'?'checked':''} onclick="updateFestival(${p.id}, ${i}, '2nd')"> 🥈 2등
                             </label>
                             <label>
                                 <input type="radio" name="fest-${p.id}-${i}" value="none" ${val==='none'?'checked':''} onclick="updateFestival(${p.id}, ${i}, 'none')"> ❌ 없음
