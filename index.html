@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메이플밸리 | 마스터 디럭스</title>
+    
+    <!-- 구글 폰트 & Font Awesome 아이콘 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #689f38 0%, #2e7d32 100%);
+            --container-bg: rgba(255, 255, 255, 0.96);
+            --primary-green: #1b5e20;
+            --secondary-brown: #5d4037;
+            --accent-orange: #f4511e;
+            --accent-yellow: #ffb300;
+            --card-bg: #f1f8e9;
+            --font-main: 'Noto Sans KR', sans-serif;
+            --font-title: 'Do Hyeon', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-gradient);
+            color: #3e2723;
+            min-height: 100vh;
+            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--container-bg);
+            border-radius: 35px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 6px solid #fff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-family: var(--font-title);
+            font-size: 2.8rem;
+            color: var(--primary-green);
+            text-shadow: 3px 3px 0px var(--accent-yellow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--secondary-brown);
+            font-weight: 700;
+        }
+
+        .setup-section {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 35px;
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 25px;
+            border: 2px dashed var(--primary-green);
+        }
+
+        input[type="text"] {
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            border: 2px solid #c8e6c9;
+            border-radius: 15px;
+            width: 50%;
+            outline: none;
+            background: #fff;
+        }
+
+        input[type="text"]:focus { border-color: var(--primary-green); }
+
+        .btn-main {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            padding: 12px 25px;
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #d84315;
+            transition: all 0.1s;
+        }
+
+        .btn-main:active { transform: translateY(4px); box-shadow: 0 0 0 #d84315; }
+
+        .category-group {
+            background: var(--card-bg);
+            border: 3px solid #c5e1a5;
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 3px solid #dcedc8;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .category-header h2 {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            color: var(--primary-green);
+        }
+
+        .category-header span {
+            font-size: 0.95rem;
+            color: var(--secondary-brown);
+            background: #fff;
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 1px solid #d7ccc8;
+            font-weight: bold;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .item-card {
+            background: #fff;
+            border: 2px solid #d7ccc8;
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+
+        .item-card:hover { transform: translateY(-3px); border-color: var(--accent-yellow); }
+
+        .item-player-name {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            color: var(--secondary-brown);
+        }
+
+        .item-card input[type="number"] {
+            font-family: var(--font-main);
+            width: 100%;
+            padding: 8px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #fafafa;
+            outline: none;
+        }
+
+        .item-card input[type="number"]:focus { border-color: var(--accent-yellow); }
+
+        /* 축제 행사 카드 순위 선택 박스 */
+        .festival-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: #faf8f5;
+            padding: 10px;
+            border-radius: 14px;
+            border: 1px solid #e0dcd0;
+        }
+
+        .festival-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .festival-label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #6d4c41;
+        }
+
+        .pill-group {
+            display: flex;
+            gap: 4px;
+        }
+
+        .pill-group label {
+            font-size: 0.78rem;
+            font-weight: bold;
+            padding: 4px 8px;
+            background: #fff;
+            border: 1px solid #d7ccc8;
+            border-radius: 8px;
+            color: #8d6e63;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .pill-group input[type="radio"] {
+            display: none;
+        }
+
+        .pill-group label:has(input[value="1st"]:checked) {
+            background: #fff8e1;
+            border-color: #ffa000;
+            color: #e65100;
+            box-shadow: 0 2px 5px rgba(255, 160, 0, 0.2);
+        }
+
+        .pill-group label:has(input[value="2nd"]:checked) {
+            background: #e8f5e9;
+            border-color: #66bb6a;
+            color: #2e7d32;
+            box-shadow: 0 2px 5px rgba(102, 187, 106, 0.2);
+        }
+
+        .pill-group label:has(input[value="none"]:checked) {
+            background: #eceff1;
+            border-color: #90a4ae;
+            color: #455a64;
+        }
+
+        .action-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-calc {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            padding: 16px 50px;
+            background: linear-gradient(45deg, var(--accent-orange), var(--accent-yellow));
+            color: #fff;
+            border: 4px solid #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #bf360c;
+            transition: all 0.1s;
+        }
+
+        .btn-calc:active {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #bf360c;
+        }
+
+        /* 제작자 표기 스타일 */
+        .creator-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--secondary-brown);
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: #fff;
+            padding: 35px;
+            border-radius: 30px;
+            text-align: center;
+            width: 90%;
+            max-width: 520px;
+            border: 6px solid var(--accent-yellow);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-content h2 {
+            font-family: var(--font-title);
+            font-size: 2.3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        .rank-list-box {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .rank-item {
+            background: #f1f8e9;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+        .rank-row-top {
+            display: flex;
+            justify-content: space-between;
+        }
+        .rank-comment {
+            font-size: 0.9rem;
+            color: #d84315;
+            font-weight: bold;
+            background: #ffe0b2;
+            padding: 4px 8px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .btn-close {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            padding: 10px 25px;
+            background-color: var(--secondary-brown);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <header>
+        <h1>🌲 숲속 축제 점수 계산소 🐾</h1>
+        <p><i class="fas fa-leaf"></i> 항목별 그룹에서 플레이어별 점수를 한눈에 관리하세요! <i class="fas fa-leaf"></i></p>
+    </header>
+
+    <!-- 플레이어 추가 섹션 -->
+    <section class="setup-section">
+        <input type="text" id="playerNameInput" placeholder="참가하는 동물 친구 이름 (예: 다람쥐)" onkeypress="if(event.key==='Enter') addPlayer()">
+        <button class="btn-main" onclick="addPlayer()">친구 추가 <i class="fas fa-user-plus"></i></button>
+    </section>
+
+    <!-- 1. 기념품 카드 그룹 -->
+    <div class="category-group">
+        <div class="category-header">
+            <i class="fas fa-gift fa-2x" style="color:#e91e63;"></i>
+            <div>
+                <h2>1. 기념품 카드 점수</h2>
+                <span>카드에 표시된 점수와 추가 점수 합산</span>
+            </div>
+        </div>
+        <div class="category-grid" id="group-souvenir">
+            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+        </div>
+    </div>
+
+    <!-- 2. 친구 카드 그룹 -->
+    <div class="category-group">
+        <div class="category-header">
+            <i class="fas fa-hands-helping fa-2x" style="color:#3f51b5;"></i>
+            <div>
+                <h2>2. 친구 카드 점수</h2>
+                <span>친구 카드에 표시된 점수 모두 더하기</span>
+            </div>
+        </div>
+        <div class="category-grid" id="group-friend">
+            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+        </div>
+    </div>
+
+    <!-- 3. 패치 카드 그룹 -->
+    <div class="category-group">
+        <div class="category-header">
+            <i class="fas fa-puzzle-piece fa-2x" style="color:#009688;"></i>
+            <div>
+                <h2>3. 패치 카드 점수</h2>
+                <span>패치 카드 표시 점수 및 추가 점수 합산</span>
+            </div>
+        </div>
+        <div class="category-grid" id="group-patch">
+            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+        </div>
+    </div>
+
+    <!-- 4. 남은 자원 점수 그룹 -->
+    <div class="category-group">
+        <div class="category-header">
+            <i class="fas fa-gem fa-2x" style="color:#ff9800;"></i>
+            <div>
+                <h2>4. 남은 자원 점수</h2>
+                <span>지도/꿀 (1개당 1점) / 나머지 자원 (3개당 1점)</span>
+            </div>
+        </div>
+        <div class="category-grid" id="group-resource">
+            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+        </div>
+    </div>
+
+    <!-- 5. 축제 행사 카드 점수 그룹 -->
+    <div class="category-group">
+        <div class="category-header">
+            <i class="fas fa-flag-checkered fa-2x" style="color:#e65100;"></i>
+            <div>
+                <h2>5. 축제 행사 카드 순위 보너스 (최대 3개)</h2>
+                <span>각 행사별로 1등(+5) 또는 2등(+3)을 간편하게 체크하세요!</span>
+            </div>
+        </div>
+        <div class="category-grid" id="group-festival">
+            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+        </div>
+    </div>
+
+    <!-- 최종 결과 발표 버튼 -->
+    <div class="action-section">
+        <button class="btn-calc" onclick="calculateAll()">🎉 최종 축제 결과 발표! 🎉</button>
+    </div>
+
+    <!-- 제작자 표기 -->
+    <div class="creator-footer">
+        <i class="fas fa-code"></i> 제작자 : 천상민
+    </div>
+</div>
+
+<!-- 결과 모달 -->
+<div id="result-modal" class="modal">
+    <div class="modal-content">
+        <h2>🏆 명예의 숲 우승자 🏆</h2>
+        <div id="ranking-list" class="rank-list-box"></div>
+        <button class="btn-close" onclick="closeModal()">다시 축제 즐기기</button>
+    </div>
+</div>
+
+<script>
+    let players = [];
+
+    function addPlayer() {
+        const input = document.getElementById('playerNameInput');
+        const name = input.value.trim();
+        if(!name) {
+            alert("동물 친구의 이름을 입력해주세요!");
+            return;
+        }
+
+        players.push({
+            id: Date.now() + Math.random(),
+            name: name,
+            souvenir: 0,
+            friend: 0,
+            patch: 0,
+            mapHoney: 0,
+            otherRes: 0,
+            festivals: ['none', 'none', 'none'] 
+        });
+
+        input.value = '';
+        renderAllCategories();
+    }
+
+    function updateValue(id, field, value) {
+        const player = players.find(p => p.id === id);
+        if(player) {
+            player[field] = value === "" ? 0 : Number(value);
+        }
+    }
+
+    function updateFestival(id, festIdx, value) {
+        const player = players.find(p => p.id === id);
+        if(player) {
+            player.festivals[festIdx] = value;
+            renderAllCategories();
+        }
+    }
+
+    function resetPlayer(id) {
+        const player = players.find(p => p.id === id);
+        if(player) {
+            player.souvenir = 0;
+            player.friend = 0;
+            player.patch = 0;
+            player.mapHoney = 0;
+            player.otherRes = 0;
+            player.festivals = ['none', 'none', 'none'];
+            renderAllCategories();
+        }
+    }
+
+    function removePlayer(id) {
+        players = players.filter(p => p.id !== id);
+        renderAllCategories();
+    }
+
+    function renderAllCategories() {
+        const sContainer = document.getElementById('group-souvenir');
+        const fContainer = document.getElementById('group-friend');
+        const pContainer = document.getElementById('group-patch');
+        const rContainer = document.getElementById('group-resource');
+        const fesContainer = document.getElementById('group-festival');
+
+        if(players.length === 0) {
+            const emptyMsg = `<p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>`;
+            sContainer.innerHTML = emptyMsg;
+            fContainer.innerHTML = emptyMsg;
+            pContainer.innerHTML = emptyMsg;
+            rContainer.innerHTML = emptyMsg;
+            fesContainer.innerHTML = emptyMsg;
+            return;
+        }
+
+        sContainer.innerHTML = '';
+        fContainer.innerHTML = '';
+        pContainer.innerHTML = '';
+        rContainer.innerHTML = '';
+        fesContainer.innerHTML = '';
+
+        players.forEach(p => {
+            const controlsHtml = `
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="item-player-name">🐾 ${p.name}</span>
+                    <div style="display:flex; gap:8px;">
+                        <button onclick="resetPlayer(${p.id})" title="이 칸 초기화" style="background:none; border:none; color:#f57f17; cursor:pointer; font-size:0.9rem;"><i class="fas fa-redo-alt"></i></button>
+                        <button onclick="removePlayer(${p.id})" title="플레이어 삭제" style="background:none; border:none; color:#e53935; cursor:pointer;"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            `;
+
+            sContainer.innerHTML += `
+                <div class="item-card">
+                    ${controlsHtml}
+                    <input type="number" value="${p.souvenir === 0 ? '' : p.souvenir}" placeholder="기념품 점수 입력" oninput="updateValue(${p.id}, 'souvenir', this.value)">
+                </div>
+            `;
+
+            fContainer.innerHTML += `
+                <div class="item-card">
+                    ${controlsHtml}
+                    <input type="number" value="${p.friend === 0 ? '' : p.friend}" placeholder="친구 카드 점수 입력" oninput="updateValue(${p.id}, 'friend', this.value)">
+                </div>
+            `;
+
+            pContainer.innerHTML += `
+                <div class="item-card">
+                    ${controlsHtml}
+                    <input type="number" value="${p.patch === 0 ? '' : p.patch}" placeholder="패치 카드 점수 입력" oninput="updateValue(${p.id}, 'patch', this.value)">
+                </div>
+            `;
+
+            rContainer.innerHTML += `
+                <div class="item-card">
+                    ${controlsHtml}
+                    <div style="font-size:0.8rem; color:#666;">지도/꿀(1개=1점)</div>
+                    <input type="number" value="${p.mapHoney === 0 ? '' : p.mapHoney}" placeholder="지도/꿀 개수" oninput="updateValue(${p.id}, 'mapHoney', this.value)">
+                    <div style="font-size:0.8rem; color:#666; margin-top:4px;">기타자원(3개=1점)</div>
+                    <input type="number" value="${p.otherRes === 0 ? '' : p.otherRes}" placeholder="기타 자원 개수" oninput="updateValue(${p.id}, 'otherRes', this.value)">
+                </div>
+            `;
+
+            let festivalRowsHtml = '';
+            for(let i = 0; i < 3; i++) {
+                let val = p.festivals[i];
+                festivalRowsHtml += `
+                    <div class="festival-row">
+                        <span class="festival-label">행사 ${i+1}</span>
+                        <div class="pill-group">
+                            <label>
+                                <input type="radio" name="fest-${p.id}-${i}" value="1st" ${val==='1st'?'checked':''} onclick="updateFestival(${p.id}, ${i}, '1st')"> 🥇 1등(+5)
+                            </label>
+                            <label>
+                                <input type="radio" name="fest-${p.id}-${i}" value="2nd" ${val==='2nd'?'checked':''} onclick="updateFestival(${p.id}, ${i}, '2nd')"> 🥈 2등(+3)
+                            </label>
+                            <label>
+                                <input type="radio" name="fest-${p.id}-${i}" value="none" ${val==='none'?'checked':''} onclick="updateFestival(${p.id}, ${i}, 'none')"> ❌ 없음
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }
+
+            fesContainer.innerHTML += `
+                <div class="item-card">
+                    ${controlsHtml}
+                    <div class="festival-container">
+                        ${festivalRowsHtml}
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function getScoreComment(score) {
+        if (score <= 25) return "💤 혹시 꿈나라에서 게임 중이신가요? (졸리세요?)";
+        if (score <= 50) return "☕ 바람을 느끼며 고요하게 즐기는 '차분한' 플레이어";
+        if (score <= 75) return "🔥 눈빛부터 달라진 '열정적인' 도전자";
+        if (score <= 100) return "⚡ 숲속이 들썩이는 '활기넘치는' 분위기 메이커";
+        if (score <= 125) return "🎪 축제의 진짜 매력을 아는 '축제를 즐기는' 고수";
+        return "👑 오늘의 완벽한 주인공! '축제의 주인공인' 레전드 등극!";
+    }
+
+    function calculateAll() {
+        if(players.length === 0) {
+            alert("점수를 계산할 친구가 없습니다!");
+            return;
+        }
+
+        const results = players.map(p => {
+            const cardSum = p.souvenir + p.friend + p.patch;
+            const resourceSum = p.mapHoney + Math.floor(p.otherRes / 3);
+            
+            let festivalBonus = 0;
+            p.festivals.forEach(f => {
+                if(f === '1st') festivalBonus += 5;
+                else if(f === '2nd') festivalBonus += 3;
+            });
+
+            const total = cardSum + resourceSum + festivalBonus;
+            return { name: p.name, total: total, comment: getScoreComment(total) };
+        });
+
+        results.sort((a,b) => b.total - a.total);
+
+        const rankingList = document.getElementById('ranking-list');
+        rankingList.innerHTML = '';
+        results.forEach((r, idx) => {
+            rankingList.innerHTML += `
+                <div class="rank-item">
+                    <div class="rank-row-top">
+                        <span>${idx+1}등. 🐾 ${r.name}</span> 
+                        <span>${r.total}점</span>
+                    </div>
+                    <div><span class="rank-comment">${r.comment}</span></div>
+                </div>
+            `;
+        });
+
+        document.getElementById('result-modal').classList.0('add')('show'); // syntax fix
+        document.getElementById('result-modal').classList.add('show');
+    }
+
+    function closeModal() {
+        document.getElementById('result-modal').classList.remove('show');
+        
+        players.forEach(p => {
+            p.souvenir = 0;
+            p.friend = 0;
+            p.patch = 0;
+            p.mapHoney = 0;
+            p.otherRes = 0;
+            p.festivals = ['none', 'none', 'none'];
+        });
+        
+        renderAllCategories();
+    }
+</script>
+
+</body>
+</html>
