@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메이플밸리 | 마스터 디럭스</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>숲속 축제 점수 계산소 | 마스터 디럭스</title>
     
     <!-- 구글 폰트 & Font Awesome 아이콘 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -22,14 +22,14 @@
             --font-title: 'Do Hyeon', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: var(--font-main);
             background: var(--bg-gradient);
             color: #3e2723;
             min-height: 100vh;
-            padding: 30px 15px;
+            padding: 15px 10px;
             display: flex;
             justify-content: center;
         }
@@ -38,49 +38,49 @@
             width: 100%;
             max-width: 900px;
             background: var(--container-bg);
-            border-radius: 35px;
-            padding: 35px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border: 6px solid #fff;
+            border-radius: 25px;
+            padding: 20px 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 4px solid #fff;
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         header h1 {
             font-family: var(--font-title);
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: var(--primary-green);
-            text-shadow: 3px 3px 0px var(--accent-yellow);
-            margin-bottom: 8px;
+            text-shadow: 2px 2px 0px var(--accent-yellow);
+            margin-bottom: 5px;
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--secondary-brown);
             font-weight: 700;
         }
 
         .setup-section {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             justify-content: center;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             background: #e8f5e9;
-            padding: 20px;
-            border-radius: 25px;
+            padding: 15px;
+            border-radius: 20px;
             border: 2px dashed var(--primary-green);
         }
 
         input[type="text"] {
             font-family: var(--font-main);
-            font-size: 1.1rem;
-            padding: 12px 20px;
+            font-size: 1rem;
+            padding: 10px 15px;
             border: 2px solid #c8e6c9;
-            border-radius: 15px;
-            width: 50%;
+            border-radius: 12px;
+            width: 60%;
             outline: none;
             background: #fff;
         }
@@ -89,83 +89,102 @@
 
         .btn-main {
             font-family: var(--font-title);
-            font-size: 1.1rem;
-            padding: 12px 25px;
+            font-size: 1rem;
+            padding: 10px 18px;
             background-color: var(--accent-orange);
             color: white;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #d84315;
-            transition: all 0.1s;
+            box-shadow: 0 3px 0 #d84315;
+            white-space: nowrap;
         }
 
-        .btn-main:active { transform: translateY(4px); box-shadow: 0 0 0 #d84315; }
+        .btn-main:active { transform: translateY(3px); box-shadow: 0 0 0 #d84315; }
 
         .category-group {
             background: var(--card-bg);
-            border: 3px solid #c5e1a5;
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 2px solid #c5e1a5;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
         .category-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            border-bottom: 3px solid #dcedc8;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            border-bottom: 2px solid #dcedc8;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .category-header i {
+            font-size: 1.5rem !important;
         }
 
         .category-header h2 {
             font-family: var(--font-title);
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             color: var(--primary-green);
         }
 
         .category-header span {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: var(--secondary-brown);
             background: #fff;
-            padding: 4px 10px;
-            border-radius: 10px;
+            padding: 3px 8px;
+            border-radius: 8px;
             border: 1px solid #d7ccc8;
             font-weight: bold;
+            display: none; /* 모바일 공간 절약을 위해 서브 설명 숨김 (필요시 제거 가능) */
         }
 
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
+            grid-template-columns: 1fr; /* 모바일에선 기본 1열 배치 */
+            gap: 12px;
+        }
+
+        /* 태블릿 이상 크기부터는 2열 배치 허용 */
+        @media(min-width: 600px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .category-header span {
+                display: inline-block;
+            }
+            .main-container {
+                padding: 30px;
+                border-radius: 30px;
+            }
+            header h1 {
+                font-size: 2.6rem;
+            }
         }
 
         .item-card {
             background: #fff;
             border: 2px solid #d7ccc8;
-            border-radius: 18px;
-            padding: 16px;
+            border-radius: 15px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            transition: transform 0.2s;
+            gap: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
         }
-
-        .item-card:hover { transform: translateY(-3px); border-color: var(--accent-yellow); }
 
         .item-player-name {
             font-family: var(--font-title);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--secondary-brown);
         }
 
         .item-card input[type="number"] {
             font-family: var(--font-main);
             width: 100%;
-            padding: 8px 10px;
+            padding: 10px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 1rem;
@@ -175,14 +194,14 @@
 
         .item-card input[type="number"]:focus { border-color: var(--accent-yellow); }
 
-        /* 축제 행사 카드 순위 선택 박스 */
+        /* 축제 행사 카드 순위 선택 박스 (모바일 터치 최적화) */
         .festival-container {
             display: flex;
             flex-direction: column;
             gap: 8px;
             background: #faf8f5;
             padding: 10px;
-            border-radius: 14px;
+            border-radius: 12px;
             border: 1px solid #e0dcd0;
         }
 
@@ -204,16 +223,16 @@
         }
 
         .pill-group label {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: bold;
-            padding: 4px 8px;
+            padding: 6px 10px; /* 모바일 터치 영역 확장 */
             background: #fff;
             border: 1px solid #d7ccc8;
             border-radius: 8px;
             color: #8d6e63;
             cursor: pointer;
-            transition: all 0.2s ease;
             user-select: none;
+            text-align: center;
         }
 
         .pill-group input[type="radio"] {
@@ -224,14 +243,14 @@
             background: #fff8e1;
             border-color: #ffa000;
             color: #e65100;
-            box-shadow: 0 2px 5px rgba(255, 160, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(255, 160, 0, 0.2);
         }
 
         .pill-group label:has(input[value="2nd"]:checked) {
             background: #e8f5e9;
             border-color: #66bb6a;
             color: #2e7d32;
-            box-shadow: 0 2px 5px rgba(102, 187, 106, 0.2);
+            box-shadow: 0 2px 4px rgba(102, 187, 106, 0.2);
         }
 
         .pill-group label:has(input[value="none"]:checked) {
@@ -242,32 +261,33 @@
 
         .action-section {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
         .btn-calc {
             font-family: var(--font-title);
-            font-size: 1.8rem;
-            padding: 16px 50px;
+            font-size: 1.5rem;
+            padding: 14px 30px;
             background: linear-gradient(45deg, var(--accent-orange), var(--accent-yellow));
             color: #fff;
-            border: 4px solid #fff;
-            border-radius: 50px;
+            border: 3px solid #fff;
+            border-radius: 40px;
             cursor: pointer;
-            box-shadow: 0 8px 0 #bf360c;
-            transition: all 0.1s;
+            box-shadow: 0 6px 0 #bf360c;
+            width: 100%;
+            max-width: 400px;
         }
 
         .btn-calc:active {
-            transform: translateY(8px);
+            transform: translateY(6px);
             box-shadow: 0 0 0 #bf360c;
         }
 
-        /* 제작자 표기 스타일 */
+        /* 제작자 표기 */
         .creator-footer {
             text-align: center;
             margin-top: 25px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--secondary-brown);
             font-weight: 700;
             opacity: 0.8;
@@ -281,24 +301,25 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 15px;
         }
         .modal.show { display: flex; }
         .modal-content {
             background: #fff;
-            padding: 35px;
-            border-radius: 30px;
+            padding: 25px 20px;
+            border-radius: 25px;
             text-align: center;
-            width: 90%;
-            max-width: 520px;
-            border: 6px solid var(--accent-yellow);
-            max-height: 80vh;
+            width: 100%;
+            max-width: 450px;
+            border: 4px solid var(--accent-yellow);
+            max-height: 85vh;
             overflow-y: auto;
         }
         .modal-content h2 {
             font-family: var(--font-title);
-            font-size: 2.3rem;
+            font-size: 1.8rem;
             color: var(--primary-green);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .rank-list-box {
             margin-bottom: 20px;
@@ -306,13 +327,13 @@
         }
         .rank-item {
             background: #f1f8e9;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            font-size: 1.05rem;
+            gap: 4px;
+            font-size: 1rem;
             font-weight: 700;
         }
         .rank-row-top {
@@ -320,23 +341,24 @@
             justify-content: space-between;
         }
         .rank-comment {
-            font-size: 0.9rem;
-            color: #d84315;
+            font-size: 0.85rem;
+            color: var(--d84315, #d84315);
             font-weight: bold;
             background: #ffe0b2;
-            padding: 4px 8px;
-            border-radius: 8px;
+            padding: 3px 6px;
+            border-radius: 6px;
             display: inline-block;
         }
         .btn-close {
             font-family: var(--font-title);
-            font-size: 1.2rem;
-            padding: 10px 25px;
+            font-size: 1.1rem;
+            padding: 10px 20px;
             background-color: var(--secondary-brown);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
+            width: 100%;
         }
     </style>
 </head>
@@ -345,82 +367,82 @@
 <div class="main-container">
     <header>
         <h1>🌲 숲속 축제 점수 계산소 🐾</h1>
-        <p><i class="fas fa-leaf"></i> 항목별 그룹에서 플레이어별 점수를 한눈에 관리하세요! <i class="fas fa-leaf"></i></p>
+        <p><i class="fas fa-leaf"></i> 항목별 그룹에서 플레이어별 점수를 관리하세요! <i class="fas fa-leaf"></i></p>
     </header>
 
     <!-- 플레이어 추가 섹션 -->
     <section class="setup-section">
-        <input type="text" id="playerNameInput" placeholder="참가하는 동물 친구 이름 (예: 다람쥐)" onkeypress="if(event.key==='Enter') addPlayer()">
+        <input type="text" id="playerNameInput" placeholder="동물 친구 이름 입력" onkeypress="if(event.key==='Enter') addPlayer()">
         <button class="btn-main" onclick="addPlayer()">친구 추가 <i class="fas fa-user-plus"></i></button>
     </section>
 
     <!-- 1. 기념품 카드 그룹 -->
     <div class="category-group">
         <div class="category-header">
-            <i class="fas fa-gift fa-2x" style="color:#e91e63;"></i>
+            <i class="fas fa-gift" style="color:#e91e63;"></i>
             <div>
                 <h2>1. 기념품 카드 점수</h2>
-                <span>카드에 표시된 점수와 추가 점수 합산</span>
+                <span>표시된 점수 및 추가 점수 합산</span>
             </div>
         </div>
         <div class="category-grid" id="group-souvenir">
-            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+            <p style="color:#777; font-size:0.9rem; text-align:center; padding:10px;">등록된 친구가 없습니다.</p>
         </div>
     </div>
 
     <!-- 2. 친구 카드 그룹 -->
     <div class="category-group">
         <div class="category-header">
-            <i class="fas fa-hands-helping fa-2x" style="color:#3f51b5;"></i>
+            <i class="fas fa-hands-helping" style="color:#3f51b5;"></i>
             <div>
                 <h2>2. 친구 카드 점수</h2>
-                <span>친구 카드에 표시된 점수 모두 더하기</span>
+                <span>친구 카드 점수 모두 더하기</span>
             </div>
         </div>
         <div class="category-grid" id="group-friend">
-            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+            <p style="color:#777; font-size:0.9rem; text-align:center; padding:10px;">등록된 친구가 없습니다.</p>
         </div>
     </div>
 
     <!-- 3. 패치 카드 그룹 -->
     <div class="category-group">
         <div class="category-header">
-            <i class="fas fa-puzzle-piece fa-2x" style="color:#009688;"></i>
+            <i class="fas fa-puzzle-piece" style="color:#009688;"></i>
             <div>
                 <h2>3. 패치 카드 점수</h2>
-                <span>패치 카드 표시 점수 및 추가 점수 합산</span>
+                <span>패치 카드 점수 및 추가 점수 합산</span>
             </div>
         </div>
         <div class="category-grid" id="group-patch">
-            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+            <p style="color:#777; font-size:0.9rem; text-align:center; padding:10px;">등록된 친구가 없습니다.</p>
         </div>
     </div>
 
     <!-- 4. 남은 자원 점수 그룹 -->
     <div class="category-group">
         <div class="category-header">
-            <i class="fas fa-gem fa-2x" style="color:#ff9800;"></i>
+            <i class="fas fa-gem" style="color:#ff9800;"></i>
             <div>
                 <h2>4. 남은 자원 점수</h2>
-                <span>지도/꿀 (1개당 1점) / 나머지 자원 (3개당 1점)</span>
+                <span>지도/꿀(1개=1점) / 나머지(3개=1점)</span>
             </div>
         </div>
         <div class="category-grid" id="group-resource">
-            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+            <p style="color:#777; font-size:0.9rem; text-align:center; padding:10px;">등록된 친구가 없습니다.</p>
         </div>
     </div>
 
     <!-- 5. 축제 행사 카드 점수 그룹 -->
     <div class="category-group">
         <div class="category-header">
-            <i class="fas fa-flag-checkered fa-2x" style="color:#e65100;"></i>
+            <i class="fas fa-flag-checkered" style="color:#e65100;"></i>
             <div>
-                <h2>5. 축제 행사 카드 순위 보너스 (최대 3개)</h2>
-                <span>각 행사별로 1등(+5) 또는 2등(+3)을 간편하게 체크하세요!</span>
+                <h2>5. 축제 행사 순위 보너스</h2>
+                <span>각 행사별 1등(+5) 또는 2등(+3) 체크</span>
             </div>
         </div>
         <div class="category-grid" id="group-festival">
-            <p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>
+            <p style="color:#777; font-size:0.9rem; text-align:center; padding:10px;">등록된 친구가 없습니다.</p>
         </div>
     </div>
 
@@ -431,7 +453,7 @@
 
     <!-- 제작자 표기 -->
     <div class="creator-footer">
-        <i class="fas fa-code"></i> 제작자 : 천상민
+        <i class="fas fa-code"></i> Designed & Crafted by 천상민
     </div>
 </div>
 
@@ -511,7 +533,7 @@
         const fesContainer = document.getElementById('group-festival');
 
         if(players.length === 0) {
-            const emptyMsg = `<p style="color:#777; grid-column:span 2;">등록된 친구가 없습니다.</p>`;
+            const emptyMsg = `<p style="color:#777; font-size:0.9rem; text-align:center; padding:10px;">등록된 친구가 없습니다.</p>`;
             sContainer.innerHTML = emptyMsg;
             fContainer.innerHTML = emptyMsg;
             pContainer.innerHTML = emptyMsg;
@@ -530,9 +552,9 @@
             const controlsHtml = `
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <span class="item-player-name">🐾 ${p.name}</span>
-                    <div style="display:flex; gap:8px;">
-                        <button onclick="resetPlayer(${p.id})" title="이 칸 초기화" style="background:none; border:none; color:#f57f17; cursor:pointer; font-size:0.9rem;"><i class="fas fa-redo-alt"></i></button>
-                        <button onclick="removePlayer(${p.id})" title="플레이어 삭제" style="background:none; border:none; color:#e53935; cursor:pointer;"><i class="fas fa-trash-alt"></i></button>
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="resetPlayer(${p.id})" title="이 칸 초기화" style="background:none; border:none; color:#f57f17; cursor:pointer; font-size:1rem; padding:4px;"><i class="fas fa-redo-alt"></i></button>
+                        <button onclick="removePlayer(${p.id})" title="플레이어 삭제" style="background:none; border:none; color:#e53935; cursor:pointer; font-size:1rem; padding:4px;"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             `;
@@ -645,7 +667,6 @@
             `;
         });
 
-        document.getElementById('result-modal').classList.0('add')('show'); // syntax fix
         document.getElementById('result-modal').classList.add('show');
     }
 
